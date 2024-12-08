@@ -28,6 +28,15 @@ namespace БатталовГлазкиSave
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Logo { get; set; }
+
+        public string AgentTypeTitle
+        
+        {
+            get
+            {
+                return AgentType.Title;
+            }
+        }
         public string Address { get; set; }
         public int Priority { get; set; }
         public string DirectorName { get; set; }

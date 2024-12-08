@@ -18,7 +18,6 @@ namespace БатталовГлазкиSave
     public partial class БатталовГлазкиSaveEntities : DbContext
     {
         private static БатталовГлазкиSaveEntities _context;
-
         public static БатталовГлазкиSaveEntities GetContext()
         {
             if (_context == null)
@@ -26,10 +25,13 @@ namespace БатталовГлазкиSave
             return _context;
         }
 
+        
         public БатталовГлазкиSaveEntities()
             : base("name=БатталовГлазкиSaveEntities")
         {
         }
+
+        
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

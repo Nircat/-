@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace БатталовГлазкиSave
 {
     /// <summary>
-    /// Логика взаимодействия для ServicePage.xaml
+    /// Логика взаимодействия для Эксперемент.xaml
     /// </summary>
-    public partial class ServicePage : Page
+    public partial class Эксперемент : Page
     {
-        public ServicePage()
+        public Эксперемент()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new AddEditPage());
         }
     }
 }
