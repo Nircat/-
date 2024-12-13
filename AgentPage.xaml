@@ -12,12 +12,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
-            <TextBox Name="SearchTextBox" Width="200" Margin="0,0,10,0" TextChanged="SearchTextBox_SelectionChanged"/>
+            <TextBox Name="SearchTextBox" Width="225" Margin="0,0,10,0" TextChanged="SearchTextBox_SelectionChanged"/>
 
-            <ComboBox Name="ComboFilter" SelectionChanged="ComboFilter_SelectionChanged" Width="150">
+            <ComboBox Name="ComboFilter" SelectionChanged="ComboFilter_SelectionChanged" Width="225" FontSize="15" Height="30">
                 <ComboBoxItem Content="Сортировка" IsSelected="True" />
                 <ComboBoxItem Content="Наименование по возрастанию" />
                 <ComboBoxItem Content="Наименование по убыванию" />
@@ -27,8 +28,8 @@
                 <ComboBoxItem Content="Приоритет по убыванию" />
             </ComboBox>
 
-            <ComboBox Name="ComboType" SelectionChanged="ComboType_SelectionChanged" Margin="2" FontSize="15" Width="200">
-                <ComboBoxItem Content="Все" IsSelected="True"/>
+            <ComboBox Name="ComboType" SelectionChanged="ComboType_SelectionChanged" Margin="10 0 0 0" FontSize="15" Width="225">
+                <ComboBoxItem Content="Фильтрация" IsSelected="True"/>
                 <ComboBoxItem Content="МФО" />
                 <ComboBoxItem Content="ООО" />
                 <ComboBoxItem Content="ЗАО" />
@@ -52,7 +53,7 @@
                         
                         <Image Width="Auto" Height="Auto" Grid.Column="0" Stretch="UniformToFill" HorizontalAlignment="Center" Grid.RowSpan="2" Margin="0 0 10 0">
                             <Image.Source>
-                                <Binding Path="Logo" TargetNullValue="Images/picture.png" />
+                                <Binding Path="Logo" TargetNullValue="/Images/picture.png" />
                             </Image.Source>
                         </Image>
 
@@ -71,6 +72,17 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="5">
+            <Button x:Name="LeftDirButton" Content="&lt;" HorizontalAlignment="Right" Click="LeftDirButton_Click" Width="15" Height="25" Background="White"  BorderThickness="0" BorderBrush="Transparent" Margin="0 0 0 10" />
+            <ListBox Name="PageListBox" FontSize="20" MouseUp="PageListBox_MouseUp" BorderThickness="0" BorderBrush="Transparent" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <Button x:Name="RightDirButton" Content="&gt;" Click="RightDirButton_Click" Width="15" Height="25" Background="White" BorderThickness="0" BorderBrush="Transparent" Margin="0 0 0 10"/>
+        </StackPanel>
 
     </Grid>
 </Page>
