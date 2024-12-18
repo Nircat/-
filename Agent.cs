@@ -34,9 +34,10 @@ namespace БатталовГлазкиSave
         {
             get
             {
-                return AgentType.Title;
+                return AgentType != null ? AgentType.Title : "Тип не задан";
             }
         }
+
         public string Address { get; set; }
         public int Priority { get; set; }
         public string DirectorName { get; set; }

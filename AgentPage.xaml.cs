@@ -35,11 +35,6 @@ namespace БатталовГлазкиSave
         List<Agent> TableList;
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Manager.MainFrame.Navigate(new AddEditPage());
-        }
-
         public void Update()
         {
             var agents = БатталовГлазкиSaveEntities.GetContext().Agent.ToList();
@@ -217,6 +212,12 @@ namespace БатталовГлазкиSave
                 AgentListView.ItemsSource = CurrentPageList;
                 AgentListView.Items.Refresh();
             }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Manager.MainFrame.Navigate(new AddEditPage());
+            Manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as Agent));
         }
     }
 }
