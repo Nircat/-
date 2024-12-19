@@ -17,6 +17,9 @@ namespace БатталовГлазкиSave
         int CountRecords;
         int CountPage;
         int CurrentPage = 0;
+        List<Agent> CurrentPageList = new List<Agent>();
+        List<Agent> TableList;
+
 
 
         public AgentPage()
@@ -31,10 +34,6 @@ namespace БатталовГлазкиSave
         }
 
 
-        List<Agent> CurrentPageList = new List<Agent>();
-        List<Agent> TableList;
-
-
         public void Update()
         {
             var agents = БатталовГлазкиSaveEntities.GetContext().Agent.ToList();
@@ -46,6 +45,12 @@ namespace БатталовГлазкиSave
                     break;
                 case 2:
                     agents = agents.OrderByDescending(a => a.Title).ToList();
+                    break;
+                case 3:
+                    agents = agents.OrderBy(a => a.Discount).ToList();
+                    break;
+                case 4:
+                    agents = agents.OrderByDescending(a => a.Discount).ToList();
                     break;
                 case 5:
                     agents = agents.OrderBy(a => a.Priority).ToList();
@@ -147,7 +152,7 @@ namespace БатталовГлазкиSave
                 CountPage = countRecords / 10;
             }
 
-            bool ifUpdate = true;
+            Boolean ifUpdate = true;
             int min;
 
             if (selectedPage.HasValue)
@@ -208,6 +213,9 @@ namespace БатталовГлазкиSave
                     PageListBox.Items.Add(i);
                 }
                 PageListBox.SelectedIndex = CurrentPage;
+                min = CurrentPage * 10 + 10 < countRecords ? CurrentPage * 10 + 10 : countRecords;
+                TBCount.Text = min.ToString();
+                TBAllRecords.Text = " из " + countRecords.ToString();
 
                 AgentListView.ItemsSource = CurrentPageList;
                 AgentListView.Items.Refresh();
@@ -218,6 +226,31 @@ namespace БатталовГлазкиSave
         {
             //Manager.MainFrame.Navigate(new AddEditPage());
             Manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as Agent));
+        }
+
+        private void ChangePriorityButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Передаем ListView в окно изменения приоритета
+            PriorityChangeWindow window = new PriorityChangeWindow(AgentListView);
+            window.ShowDialog(); // Показываем окно
+        }
+
+        private void AgentListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Устанавливаем видимость кнопки в зависимости от количества выбранных элементов
+            ChangePriorityButton.Visibility = AgentListView.SelectedItems.Count > 1
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                БатталовГлазкиSaveEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                AgentListView.ItemsSource = БатталовГлазкиSaveEntities.GetContext().Agent.ToList();
+                Update();
+            }
         }
     }
 }

@@ -104,6 +104,9 @@
     <Compile Include="MaterialType.cs">
       <DependentUpon>BattalovModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PriorityChangeWindow.xaml.cs">
+      <DependentUpon>PriorityChangeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>BattalovModel.tt</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PriorityChangeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Эксперемент.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

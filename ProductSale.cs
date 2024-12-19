@@ -16,10 +16,27 @@ namespace БатталовГлазкиSave
     {
         public int ID { get; set; }
         public int AgentID { get; set; }
+        public string ProductName
+        {
+            get
+            {
+                return Product.Title;
+            }
+
+        }
         public int ProductID { get; set; }
         public System.DateTime SaleDate { get; set; }
         public int ProductCount { get; set; }
-    
+
+        public decimal Stoimost
+        {
+            get
+            {
+                return Product != null ? Product.MinCostForAgent * ProductCount : 0;
+            }
+        }
+
+       
         public virtual Agent Agent { get; set; }
         public virtual Product Product { get; set; }
     }
